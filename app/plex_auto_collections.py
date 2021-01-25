@@ -131,6 +131,7 @@ def update_from_config(config_path, plex, headless=False, no_meta=False, no_imag
         "tmdb-list": "tmdb_collection",
         "tmdb-poster": "tmdb_poster",
         "imdb-list": "imdb_list",
+        "letterboxd-list":"letterboxd_list",
         "trakt-list": "trakt_list",
         "video-resolution": "video_resolution",
         "audio-language": "audio_language",
@@ -154,6 +155,7 @@ def update_from_config(config_path, plex, headless=False, no_meta=False, no_imag
         "tmdb_show": "TMDb Show",
         "tvdb_show": "TVDb Show",
         "imdb_list": "IMDb List",
+        "letterboxd_list": "Letterboxd List",
         "trakt_list": "Trakt List",
         "trakt_trending": "Trakt Trending",
         "trakt_watchlist": "Trakt Watchlist"
@@ -179,6 +181,7 @@ def update_from_config(config_path, plex, headless=False, no_meta=False, no_imag
         "tmdb_show",
         "tvdb_show",
         "imdb_list",
+        "letterboxd_list",
         "trakt_list",
         "trakt_trending",
         "trakt_watchlist",
@@ -506,6 +509,8 @@ def update_from_config(config_path, plex, headless=False, no_meta=False, no_imag
                         if title_ids:
                             good_lists.append((imdb_url, title_ids))
                     methods.append((method_name, good_lists))
+                elif method_name == "letterboxd_list":
+                    methods.append((method_name, get_attribute_list(collection[c][m])))
                 elif method_name == "trakt_list": #TODO: validate
                     methods.append((method_name, get_attribute_list(collections[c][m])))
                 elif method_name == "trakt_trending":

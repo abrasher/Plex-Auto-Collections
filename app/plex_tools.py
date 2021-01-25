@@ -6,6 +6,7 @@ from plexapi.library import ShowSection
 from datetime import datetime, timedelta
 import imdb_tools
 import trakt_tools
+import letterboxd_tools
 from config_tools import Config
 from config_tools import TMDB
 from config_tools import TraktClient
@@ -244,6 +245,8 @@ def add_to_collection(config_path, plex, method, value, c, plex_map=None, map=No
             items, missing = imdb_tools.tmdb_get_movies(config_path, plex, plex_map, value, method)
         elif "tmdb" in method and plex.library_type == "show":
             items, missing = imdb_tools.tmdb_get_shows(config_path, plex, plex_map, value, method)
+    elif "letterboxd" in method:
+        items, missing = letterboxd_tools.letterboxd_get_movies(config_path, plex, plex_map, value)
     elif "trakt" in method:
         if not TraktClient.valid:
             raise KeyError("| trakt connection required for {}",format(method))
